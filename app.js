@@ -57,7 +57,7 @@ app.post("/loc", (req, res, next) => {
           weather = resp.data.consolidated_weather[0].weather_state_name
           temperature = resp.data.consolidated_weather[0].the_temp
           console.log(weather,temperature)
-          res.redirect('/loc')
+          res.redirect('/')
         })
     .catch((err) => {
       console.log(err)
@@ -78,12 +78,6 @@ app.get("/", function(req, res) {
       res.sendStatus(501);
   });
 });
-
-app.get("/loc", (req, res) => {
-  console.log('hahha22222')
-  res.status(200).json({weather: weather,loc: location, cor: coordinate,temp: temperature});
-});
-
 
 app.get("*", function(req, res) {
 	res.send("Invalid URL!!");
