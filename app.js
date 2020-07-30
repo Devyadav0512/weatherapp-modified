@@ -1,7 +1,6 @@
 const express = require("express");
 const app = express();
 const bodyparser = require("body-parser");
-const { request } = require("express");
 const axios = require('axios')
 
 app.use(bodyparser.urlencoded({extended:true}));
