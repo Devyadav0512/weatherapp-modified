@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 const bodyparser = require("body-parser");
-const axios = require('axios')
+const axios = require('axios');
 
 app.use(bodyparser.urlencoded({extended:true}));
 app.use(express.static("public"));
@@ -17,7 +17,7 @@ app.get("/", (req, res) => {
   res.render("home", {location: location, weather: weather, temperature: temperature, image: image});
 });
 
-app.post("/loc", (req, res, next) => {
+app.post("/", (req, res, next) => {
     location = req.body.location;
      axios
       .get('https://www.metaweather.com/api/location/search/?query='+location)
@@ -29,6 +29,7 @@ app.post("/loc", (req, res, next) => {
           .then((resp) => {
             weather = resp.data.consolidated_weather[0].weather_state_name
             temperature = resp.data.consolidated_weather[0].the_temp
+            image = "https://www.metaweather.com/static/img/weather/png/64/"+resp.data.consolidated_weather[1].weather_state_abbr+".png"
             console.log(weather,temperature)
             res.redirect('/')
           })
